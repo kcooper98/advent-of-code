@@ -36,12 +36,13 @@ fn main() {
                 for badge in first_set.intersection(&second_set) {
                     if third_set.contains(badge) {
                         sum += compute_priority(*badge);
+                        break;
                     }
                 }
-
                 first_set.clear();
                 second_set.clear();
                 third_set.clear();
+
             }
         }
     }
