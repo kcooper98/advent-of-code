@@ -26,7 +26,10 @@ with Path("input").open() as file:
             else:
                 start_wrap = start
 
-            surround_symbol_checks = [bool(re.match(REGEX, curr_line[start_wrap : end + 1])) for curr_line in [prev_line, line, next_line]]
+            surround_symbol_checks = [
+                bool(re.match(REGEX, curr_line[start_wrap : end + 1]))
+                for curr_line in [prev_line, line, next_line]
+            ]
             if not all(surround_symbol_checks):
                 part_num = "".join(line[start:end])
                 sum += int(part_num)
