@@ -19,15 +19,31 @@ def is_legal(games):
             (count, color) = pair.strip().split(" ")
             count = int(count)
             if count > max_dict[color]:
-                legal =  False
+                legal = False
     return legal
+
+
+def get_maxes(games):
+    maxes = dict()
+    for game in games.split(";"):
+        for pair in game.split(","):
+            pair: str
+            (count, color) = pair.strip().split(" ")
+            count = int(count)
+            if color in maxes:
+                if maxes[color] < count:
+                    maxes[color] = count
+            else:
+                maxes[color] = count
+    return maxes
 
 
 total = 0
 with Path("input").open() as file:
     for i, line in enumerate(file):
         games = line.split(":")[1].strip()
-        if is_legal(games):
-            total += i + 1
+        maxes = get_maxes(games)
+        power = maxes["red"] * maxes["green"] * maxes["blue"]
+        total += power
 
 print(total)
